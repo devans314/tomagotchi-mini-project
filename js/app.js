@@ -1,52 +1,79 @@
 let seconds = 0;
-
+let newPet;
 class Tamagotchi {
     constructor(name) {
         this.name = name;
-        this.stamina = 0;
+        this.tiredness = 0;
         this.boredom = 0;
         this.age = 0;
         this.hunger = 0;
-        this.affection = 0;
     }
 }
+newPet = new Tamagotchi();
+
 $('button').on('click', () => {
-    console.log('click works');
+    const $nameInput = $('input').val();
+    newPet.name = $nameInput;
+    $('.name').text(newPet.name)
     // When the user clicks the button, the game starts
     startGame();
-  
   });
+
+
 const startGame = () => {
+$(".start-game").empty();
 
-const newPet = new Tamagotchi();
-// const timePassing = () => {
-//     // $('.time').text(`${seconds}`);
-//     if (seconds%10 === 0){
-//         newPet.hunger++;
-//     }
-//     if (seconds%10 === 0){
-//         newPet.sleepiness++;
-//     }
-//     if (seconds%10 === 0){
-//         newPet.boredom++;
-//     }
-//     if (seconds%10 === 0){
-//         newPet.age++;
-//     }
-//     seconds++;   
-// }
+// const newPet = new Tamagotchi();
 
-// setInterval(timePassing, 1000);
-// }
+  const timePassing = () => {
+    seconds++;
+    // $('.time').text(`${seconds}`);
+    if (seconds%2 === 0){
+        newPet.hunger++;
+        $('.hunger').text('Hunger ' + newPet.hunger);
+    }
+    if (seconds%2 === 0){
+        $('.tiredness').text('tiredness ' + newPet.tiredness);
+        newPet.tiredness++;
+    }
+    if (seconds%2 === 0){
+        $('.boredom').text('Boredom ' + newPet.boredom);
+        newPet.boredom++;
+    }
+    if (seconds%5 === 0){
+        newPet.age++;
+        $('.age').text('Age ' + newPet.age);
+    }
+    // console.log(`${seconds}`);   
+}
+$('#button').append('<button onclick = rest(); id = rest>Rest</button>')
+$('#button').append('<button onclick = feed(); id = hunger>Feed</button')
+$('#button').append('<button onclick = play(); id = boredom>Play</button')
+setInterval(timePassing, 1000);
 
-
-
-$('.stamina').text(`Stamina ${newPet.stamina}`);
-$('.hunger').text(`Hunger ${newPet.hunger}`);
-$('.boredom').text(`Boredom ${newPet.boredom}`);
-$('.affection').text(`Affection ${newPet.affection}`);
-$('.age').text(`Age ${newPet.age}`);
+    $('.tiredness').text(`tiredness ${newPet.tiredness}`);
+    $('.hunger').text(`Hunger ${newPet.hunger}`);
+    $('.boredom').text(`Boredom ${newPet.boredom}`);
+    $('.age').text(`Age ${newPet.age}`);
 
 
 
 }
+
+const rest = () => {
+    newPet.tiredness -= 3
+}
+
+const feed = () => {
+    newPet.hunger -= 3
+}
+
+const play = () => {
+    newPet.boredom -= 3
+}
+
+
+
+
+
+
