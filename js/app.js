@@ -25,6 +25,12 @@ const startGame = () => {
 $(".start-game").empty();
 
 // const newPet = new Tamagotchi();
+const movePet = () => {
+    console.log('Please move tama!');
+    $("#tama").velocity({"translateX": "400px"}, 1000, () => { 
+        $("#tama").velocity({"translateX": "100px"}, 1000) 
+     })
+};
   
   const timePassing = () => {
     seconds++;
@@ -46,6 +52,7 @@ $(".start-game").empty();
         $('.age').text('Age ' + newPet.age);
     }
     // console.log(`${seconds}`);   
+    
 }
 $('#button').append('<button onclick = rest(); id = rest>Rest</button>')
 $('#button').append('<button onclick = feed(); id = hunger>Feed</button')
@@ -66,12 +73,13 @@ setInterval(timePassing, 1000);
     const death = () => {
         if(newPet.tiredness >= 10 || newPet.hunger >= 10 || newPet.boredom >= 10){
 
-        const retry = confirm("Retry?")
-        document.location.reload();
-        if (retry === true) {
-        } 
+            const retry = confirm("Retry?")
+            document.location.reload();
+            if (retry === true) {
+            } 
         }    
-        }
+    }
+        setInterval(movePet, 1000);
         setInterval(morph, 1000);
         setInterval(death, 1000);
 }
