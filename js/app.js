@@ -17,6 +17,7 @@ $('button').on('click', () => {
     $('.name').text(newPet.name)
     // When the user clicks the button, the game starts
     startGame();
+    
   });
 
 
@@ -24,7 +25,7 @@ const startGame = () => {
 $(".start-game").empty();
 
 // const newPet = new Tamagotchi();
-
+  
   const timePassing = () => {
     seconds++;
     // $('.time').text(`${seconds}`);
@@ -56,9 +57,26 @@ setInterval(timePassing, 1000);
     $('.boredom').text(`Boredom ${newPet.boredom}`);
     $('.age').text(`Age ${newPet.age}`);
 
+    const morph = () => {
+        if(newPet.age === 2){
+            $('#tama').attr('src',"assets/morph.gif")
+        }
+    }
+    
+    const death = () => {
+        if(newPet.tiredness >= 10 || newPet.hunger >= 10 || newPet.boredom >= 10){
 
-
+        const retry = confirm("Retry?")
+        document.location.reload();
+        if (retry === true) {
+        } 
+        }    
+        }
+        setInterval(morph, 1000);
+        setInterval(death, 1000);
 }
+       
+
 
 const rest = () => {
     newPet.tiredness -= 3
@@ -71,9 +89,4 @@ const feed = () => {
 const play = () => {
     newPet.boredom -= 3
 }
-
-
-
-
-
 
