@@ -7,34 +7,36 @@ class Tamagotchi {
         this.boredom = 0;
         this.age = 0;
         this.hunger = 0;
+        this.experience = 0
     }
 }
 newPet = new Tamagotchi();
+// console.log(newPet.experience);
 
 $('button').on('click', () => {
     const $nameInput = $('input').val();
     newPet.name = $nameInput;
     $('.name').text(newPet.name)
-    // When the user clicks the button, the game starts
     startGame();
-    
-  });
+  }
+);
 
 
 const startGame = () => {
 $(".start-game").empty();
 
-// const newPet = new Tamagotchi();
 const movePet = () => {
-    console.log('Please move tama!');
-    $("#tama").velocity({"translateX": "400px"}, 1000, () => { 
-        $("#tama").velocity({"translateX": "100px"}, 1000) 
+    //console.log('Please move tama!');
+    
+    $("#tama").velocity({"translateX": "-150px"}, 2000, () => { 
+        $('#tama').velocity({"rotateY": "180"})
+        $("#tama").velocity({"translateX": "800px"}, 3000) 
+        $('#tama').velocity({"rotateY": "360"})
      })
 };
   
   const timePassing = () => {
     seconds++;
-    // $('.time').text(`${seconds}`);
     if (seconds%2 === 0){
         newPet.hunger++;
         $('.hunger').text('Hunger ' + newPet.hunger);
@@ -57,6 +59,8 @@ const movePet = () => {
 $('#button').append('<button onclick = rest(); id = rest>Rest</button>')
 $('#button').append('<button onclick = feed(); id = hunger>Feed</button')
 $('#button').append('<button onclick = play(); id = boredom>Play</button')
+$('#button').append('<button onclick = train(); id = train>Train</button')
+
 setInterval(timePassing, 1000);
 
     $('.tiredness').text(`tiredness ${newPet.tiredness}`);
@@ -65,7 +69,7 @@ setInterval(timePassing, 1000);
     $('.age').text(`Age ${newPet.age}`);
 
     const morph = () => {
-        if(newPet.age === 2){
+        if(newPet.age === 4){
             $('#tama').attr('src',"assets/morph.gif")
         }
     }
@@ -87,14 +91,32 @@ setInterval(timePassing, 1000);
 
 
 const rest = () => {
-    newPet.tiredness -= 3
+    if(newPet.tiredness <= 2){
+    alert(`${newPet.name} is not tired!`)
+   } else{
+       newPet.tiredness -= 3
+   }
 }
 
 const feed = () => {
+    if(newPet.hunger <= 2){
+    alert(`${newPet.name} is not hungry!`)
+    } else{
     newPet.hunger -= 3
+    }
 }
 
 const play = () => {
+    if(newPet.boredom <= 2)
+    alert(`${newPet.name} is not bored!`)
     newPet.boredom -= 3
 }
+
+// const train = () => {
+//     if('#train' === true){
+//     newPet.experience += 1
+//     }
+// }
+
+// console.log(newPet.experience);
 
